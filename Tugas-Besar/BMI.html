@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator BMI</title>
+    <!-- Menghubungkan ke file CSS yang sama -->
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+    <!-- Kontainer untuk menampung navbar -->
+    <header id="navbar-container"></header>
+
+    <!-- Menggunakan class 'konverter-container' dari CSS agar style-nya sama -->
+    <div class="konverter-container">
+        <h2>Kalkulator BMI (Body Mass Index)</h2>
+        
+        <div class="input-group">
+            <input type="number" id="berat" placeholder="Berat Badan (kg)">
+        </div>
+        <div class="input-group">
+            <input type="number" id="tinggi" placeholder="Tinggi Badan (cm)">
+        </div>
+        
+        <button onclick="hitungBmi()">Hitung BMI</button>
+        
+        <div id="hasil-bmi"></div>
+        <div id="kategori-bmi"></div>
+    </div>
+
+    <!-- Script untuk Navbar dan logika Kalkulator BMI -->
+    <script src="navbar.js"></script>
+    <script>
+        function hitungBmi() {
+            // 1. Mengambil elemen dari HTML
+            const beratInput = document.getElementById('berat');
+            const tinggiInput = document.getElementById('tinggi');
+            const hasilDiv = document.getElementById('hasil-bmi');
+            const kategoriDiv = document.getElementById('kategori-bmi');
+
+            // 2. Mengambil nilai dan mengubahnya menjadi angka
+            const berat = parseFloat(beratInput.value);
+            const tinggiCm = parseFloat(tinggiInput.value);
+
+            // Validasi input
+            if (isNaN(berat) || isNaN(tinggiCm) || berat <= 0 || tinggiCm <= 0) {
+                hasilDiv.textContent = "Error: Masukkan berat dan tinggi yang valid!";
+                hasilDiv.style.color = "red";
+                kategoriDiv.textContent = "";
+                return;
+            }
+
+            // 3. Menghitung BMI
+            // Ubah tinggi dari cm ke meter
+            const tinggiM = tinggiCm / 100;
+            // Rumus BMI: berat (kg) / (tinggi (m) * tinggi (m))
+            const bmi = berat / (tinggiM * tinggiM);
+            
+            // 4. Menentukan Kategori BMI
+            let kategori = '';
+            if (bmi < 18.5) {
+                kategori = 'Kekurangan berat badan';
+                kategoriDiv.style.color = "#3498db"; // Biru
+            } else if (bmi >= 18.5 && bmi <= 24.9) {
+                kategori = 'Normal (ideal)';
+                kategoriDiv.style.color = "var(--success-color)"; // Hijau
+            } else if (bmi >= 25.0 && bmi <= 29.9) {
+                kategori = 'Kelebihan berat badan';
+                kategoriDiv.style.color = "#f39c12"; // Oranye
+            } else {
+                kategori = 'Kegemukan (Obesitas)';
+                kategoriDiv.style.color = "#e74c3c"; // Merah
+            }
+
+            // 5. Menampilkan hasil
+            hasilDiv.style.color = "var(--text-color)";
+            hasilDiv.textContent = `BMI Anda: ${bmi.toFixed(1)}`;
+            kategoriDiv.textContent = `Kategori: ${kategori}`;
+        }
+    </script>
+</body>
+</html>
+

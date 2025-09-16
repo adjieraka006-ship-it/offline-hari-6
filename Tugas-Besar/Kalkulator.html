@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Sederhana</title>
+    <!-- Menghubungkan ke file CSS yang sama -->
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+    <!-- Kontainer untuk menampung navbar -->
+    <header id="navbar-container"></header>
+
+    <!-- Menggunakan class 'konverter-container' dari CSS agar style-nya sama -->
+    <div class="konverter-container">
+        <h2>Kalkulator Sederhana</h2>
+        
+        <!-- Grup input untuk penataan yang lebih baik -->
+        <div class="input-group">
+            <input type="number" id="angka1" placeholder="Angka 1">
+        </div>
+        <div class="input-group">
+            <select id="operator" style="width: 100%;">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">x</option>
+                <option value="/">÷</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <input type="number" id="angka2" placeholder="Angka 2">
+        </div>
+        
+        <button onclick="hitung()">Hitung</button>
+        
+        <div id="hasil">Hasil akan muncul di sini</div>
+    </div>
+
+    <!-- Script untuk Navbar dan logika Kalkulator -->
+    <script src="navbar.js"></script>
+    <script>
+        // Arrow functions untuk operasi
+        const tambah = (a, b) => a + b;
+        const kurang = (a, b) => a - b;
+        const kali   = (a, b) => a * b;
+        const bagi   = (a, b) => (b === 0 ? "Error: Tidak bisa dibagi 0" : a / b);
+
+        // Fungsi `hitung` yang dipanggil oleh tombol di HTML
+        function hitung() {
+            // 1. Mengambil elemen dari HTML
+            const inputAngka1 = document.getElementById('angka1');
+            const inputAngka2 = document.getElementById('angka2');
+            const operatorSelect = document.getElementById('operator');
+            const hasilDiv = document.getElementById('hasil');
+
+            // 2. Mengambil NILAI dan mengubahnya menjadi angka (float)
+            const angka1 = parseFloat(inputAngka1.value);
+            const angka2 = parseFloat(inputAngka2.value);
+            const operator = operatorSelect.value;
+
+            // Validasi jika input bukan angka
+            if (isNaN(angka1) || isNaN(angka2)) {
+                hasilDiv.textContent = "Error: Masukkan kedua angka!";
+                hasilDiv.style.color = "red";
+                return;
+            }
+
+            // 3. Menghitung hasil
+            let hasil;
+            switch (operator) {
+              case "+": hasil = tambah(angka1, angka2); break;
+              case "-": hasil = kurang(angka1, angka2); break;
+              case "*": hasil = kali(angka1, angka2); break;
+              case "/": hasil = bagi(angka1, angka2); break;
+              default : hasil = "Operator tidak valid!";
+            }
+
+            // 4. Menampilkan hasil ke dalam div#hasil
+            // Mengatur warna teks berdasarkan hasil
+            if (typeof hasil === 'string' && hasil.startsWith("Error")) {
+                 hasilDiv.style.color = "red";
+            } else {
+                 // Menggunakan variabel warna dari CSS untuk konsistensi
+                 hasilDiv.style.color = "var(--success-color)";
+            }
+            
+            hasilDiv.textContent = `Hasil: ${hasil}`;
+        }
+    </script>
+</body>
+</html>
+

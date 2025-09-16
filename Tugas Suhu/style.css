@@ -1,0 +1,118 @@
+/* --- CSS Diadaptasi untuk Konverter Suhu dan Navbar --- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column; /* Mengubah arah flex untuk menampung navbar */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f2f5;
+}
+
+/* --- Style untuk Navbar --- */
+#navbar-container {
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar li a {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #555;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.navbar li a:hover {
+    background-color: #f0f2f5;
+    color: #007bff;
+}
+/* --- Akhir Style Navbar --- */
+
+
+.konverter-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 450px;
+    margin-top: 80px; /* Memberi ruang dari navbar */
+}
+
+h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+.input-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+}
+
+input, select {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+input[type="number"] {
+    width: 60%;
+}
+
+select {
+    width: 35%;
+}
+
+span.equals {
+    font-size: 24px;
+    font-weight: bold;
+    color: #555;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+#hasil {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 22px;
+    color: #007bff;
+    min-height: 30px;
+}

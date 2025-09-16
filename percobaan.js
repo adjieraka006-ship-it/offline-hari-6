@@ -1,38 +1,26 @@
+// import library prompt-sync
+const prompt = require("prompt-sync")({sigint: true});
 
-const prompt = require("prompt-sync")();
+// Arrow function untuk operasi
+const tambah = (a, b) => a + b;
+const kurang = (a, b) => a - b;
+const kali   = (a, b) => a * b;
+const bagi   = (a, b) => (b === 0 ? "Error: tidak bisa dibagi 0" : a / b);
 
+// Input angka dan operator
+let angka1 = parseFloat(prompt("Masukkan angka pertama: "));
+let angka2 = parseFloat(prompt("Masukkan angka kedua: "));
+let operator = prompt("Pilih operator (+, -, *, /): ");
 
-const jalankanKalkulator = () => {
-  console.log("   Kalkulator Sederhana JS   ");
-
-  // 1. Meminta input dari pengguna
-  const angka1 = parseFloat(prompt("Masukkan angka pertama: "));
-  const operator = prompt("Pilih operator (+, -, *, /): ");
-  const angka2 = parseFloat(prompt("Masukkan angka kedua: "));
+// Hitung hasil
+let hasil;
+switch (operator) {
+  case "+": hasil = tambah(angka1, angka2); break;
+  case "-": hasil = kurang(angka1, angka2); break;
+  case "*": hasil = kali(angka1, angka2); break;
+  case "/": hasil = bagi(angka1, angka2); break;
+  default : hasil = "Operator tidak dikenali!";
 }
 
-  // Variabel untuk menyimpan hasil perhitungan
-  let hasil;
-
-  switch (operator) {
-    case "+":
-      hasil = angka1 + angka2;
-      break;
-    case "-":
-      hasil = angka1 - angka2;
-      break;
-    case "*":
-      hasil = angka1 * angka2;
-      break;
-    case "/":
-     
-
-
-  
-  console.log(`✅ Hasil dari ${angka1} ${operator} ${angka2} adalah: ${hasil}`);
-
-};
-
-// --- Menjalankan program ---
-jalankanKalkulator();
-
+// Tampilkan hasil di terminal
+console.log(`Hasil dari ${angka1} ${operator} ${angka2} = ${hasil}`);
